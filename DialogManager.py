@@ -2,6 +2,7 @@ import collections
 import random
 import numpy as np
 import itertools
+from plyer import notification
 
 from Constants import *
 from SimulatedUser import *
@@ -29,9 +30,9 @@ class DialogManager(object):
 
         return state_new
 
-    def train(self, user: SimulatedUser, max_num_episodes=1000, max_num_actions=25, gamma=0.99,
+    def train(self, user: SimulatedUser, max_num_episodes=1000, max_num_actions=30, gamma=0.99,
               exploration_rate=0.5, explore_decay_rate=0.001, Q_update=True, print_history=False,
-              store_policy=True, policy_file='policy.txt', episode_history_file='training_history.txt'):
+              store_policy=True, policy_file='policy.csv', episode_history_file='training_history.txt'):
 
         state_ult = [1] * NUM_OF_STATE_SLOTS
 
@@ -117,21 +118,21 @@ if __name__ == '__main__':
     # ir_confirm = 0.2
     # neg_confirm = 0.2
 
-    isTuning = 1
+    isTuning = 0
 
     if isTuning:
         cnts = [5000]
-        exp = [[0.8, 0.0008], [0.8, 0.001], [0.8, 0.0012], [0.8, 0.0014], [0.9, 0.0009], [0.85, 0.00085], [1, 0.001]]
-        ir_prov = [0.35]
-        ir_conf = [0.35]
-        neg_conf = [0.05, 0.08, 0.01]
+        exp = [[1, 0.001]]
+        ir_prov = [0.16, 0.18, 0.2]
+        ir_conf = [0.1, 0.12]
+        neg_conf = [0.1]
 
         for cnt, e, irprov, irconf, negconf in itertools.product(cnts, exp, ir_prov, ir_conf, neg_conf):
             user = SimulatedUser(irrelevant_prob_provide=irprov, irrelevant_prob_confirm=irconf,
                                  neg_confirm_prob=negconf)
 
             wrong_policy_cnt = 0
-            for i in range(80):
+            for i in range(1000):
                 print('test {}'.format(i + 1))
                 DM = DialogManager()
                 DM.train(user, max_num_episodes=cnt, store_policy=False,
@@ -144,17 +145,17 @@ if __name__ == '__main__':
                 f.write('{} {} {} || {} {} {} || {}\n'
                         .format(cnt, e[0], e[1], irprov, irconf, negconf, wrong_policy_cnt))
     else:
-        cnt = 8000
-        e = [0.9, 0.0009]
-        irprov = 0.35
-        irconf = 0.35
+        cnt = 5000
+        e = [1, 0.001]
+        irprov = 0.2
+        irconf = 0.1
         negconf = 0.1
 
         user = SimulatedUser(irrelevant_prob_provide=irprov, irrelevant_prob_confirm=irconf,
                              neg_confirm_prob=negconf)
 
         wrong_policy_cnt = 0
-        for i in range(80):
+        for i in range(1000):
             print('test {}'.format(i + 1))
             DM = DialogManager()
             DM.train(user, max_num_episodes=cnt, store_policy=False,
@@ -166,3 +167,4 @@ if __name__ == '__main__':
             f.write('{} {} {} || {} {} {} || {}\n'
                     .format(cnt, e[0], e[1], irprov, irconf, negconf, wrong_policy_cnt))
 
+    notification.notify('End', 'End')

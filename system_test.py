@@ -1,14 +1,15 @@
 import re
 import numpy as np
-from DialogManager import DialogManager
 from Constants import *
-
 
 restaurant_db = np.genfromtxt('restaurantDatabase.txt', delimiter='\t', dtype='str', usecols=list(range(5)))[1:,:]
 
-food_types = list(restaurant_db[:, 2]) + ['any']
-price_points = list(restaurant_db[:, 3]) + ['any']
-locations = list(restaurant_db[:, 4]) + ['any']
+food_types = set(restaurant_db[:, 2])
+price_points = set(restaurant_db[:, 3])
+locations = set(restaurant_db[:, 4])
+food_types.add('any')
+price_points.add('any')
+locations.add('any')
 
 policy_raw = np.loadtxt('policy.txt', delimiter=', ', dtype='str')
 policy = {}
@@ -109,4 +110,3 @@ else:
                      .format(r[0], ('an ' if r[3] == 'expensive' else 'a ') + r[3], r[2], r[4], r[1])
                       for r in restaurant_fil]))
 
-print()

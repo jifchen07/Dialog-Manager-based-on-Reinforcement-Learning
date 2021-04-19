@@ -13,7 +13,7 @@ class SimulatedUser(object):
                 return IRRELEVANT
             else:
                 return action_map[system_action]
-        else:
+        else:       # REQUEST TO CONFIRM
             rand = random.random()
             if rand < self.irrelevant_prob_confirm:
                 return IRRELEVANT
