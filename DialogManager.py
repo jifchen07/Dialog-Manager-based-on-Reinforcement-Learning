@@ -104,19 +104,6 @@ class DialogManager(object):
                    print_history=print_history, episode_history_file='test_history.txt')
 
 if __name__ == '__main__':
-    # user = SimulatedUser(irrelevant_prob_provide=0.4, irrelevant_prob_confirm=0.2, neg_confirm_prob=0.4)
-    # DM = DialogManager()
-    # DM.train(user, max_num_episodes=5000, store_policy=True, policy_file='policy.txt')
-    # user_test = SimulatedUser(irrelevant_prob_provide=0, irrelevant_prob_confirm=0, neg_confirm_prob=0.4)
-    # DM.test(user_test, max_num_episodes=10, print_history=True)
-
-    # max_cnt = 9000
-    # explor_rate = 0.3
-    # decay_rate = 0.0003
-    #
-    # ir_provide = 0.4
-    # ir_confirm = 0.2
-    # neg_confirm = 0.2
 
     isTuning = 0
 

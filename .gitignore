@@ -1,0 +1,11 @@
+
+.idea/aws.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.iml
+read_database.py
+test.csv
+tuning.txt
