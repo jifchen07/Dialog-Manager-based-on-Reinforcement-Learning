@@ -24,13 +24,15 @@ The DM also handles cases where the user provides irrelevant information or does
 To train the policy a simulated user is needed. The simulated user is defined in `SimulatedUser.py`. 
 
 The simulated user responds to system information requests:
-	provide relevant information with probability p = 0.8
-	provide irrelevant information with probability 1- p = 0.2
+
+* provide relevant information with probability p = 0.8
+* provide irrelevant information with probability 1- p = 0.2
 
 The simulated user responds to system confirmation requests:
-	positively confirm (YES) with probability p1 = 0.8
-	negatively confirm (YES) with probability p2 = 0.1
-	provide irrelevant information with probability of 1- p1 - p2 = 0.1
+
+* positively confirm (YES) with probability p1 = 0.8
+* negatively confirm (YES) with probability p2 = 0.1
+* provide irrelevant information with probability of 1- p1 - p2 = 0.1
 
 The above probability values are tuned to enhance the overall performance of the system
 
@@ -74,34 +76,39 @@ Simple natural language understanding and generation are applied to interact wit
 An example of the interaction between the user and the dialogue system:
 
 > System: How expensive a restaurant do you want?
+>
 > User: Good question.
-> System: How expensive a restaurant do you want? (note here that the system asks the same
-> question, which is to be expected because after the irrelevant user response the state hasn’t
-> changed, so the policy is going to select the same action, there is no training here, this is during
-> testing and the policy is fixed)
-> User: Something expensive in Hollywood. (note that here Hollywood will be ignored because
-> the system asked for the price only)
+>
+> System: How expensive a restaurant do you want? (note here that the system asks the same question, which is to be expected because after the irrelevant user response the state hasn’t changed, so the policy is going to select the same action, there is no training here, this is during testing and the policy is fixed)
+>
+> User: Something expensive in Hollywood. (note that here Hollywood will be ignored because the system asked for the price only)
+>
 > System: What type of food do you want?
+>
 > User: Maybe something.
-> System: What type of food do you want? (note here that the system asks the same question,
-> which is to be expected because after the irrelevant user response the state hasn’t changed, so
-> the policy is going to select the same action, there is no training here, this is during testing and
-> the policy is fixed)
+>
+> System: What type of food do you want? (note here that the system asks the same question, which is to be expected because after the irrelevant user response the state hasn’t changed, so the policy is going to select the same action, there is no training here, this is during testing and the policy is fixed)
+>
 > User: any
+>
 > System: Ok you said you wanted any type of food restaurant, right?
+>
 > User: Yes.
+>
 > System: Ok you said you wanted an expensive restaurant, right?
+>
 > User: what?
-> System: Ok you said you wanted an expensive restaurant, right? (note here that the system asks
-> the same question, which is to be expected because after the irrelevant user response the state
-> hasn’t changed, so the policy is going to select the same action, there is no training here, this is
-> during testing and the policy is fixed)
+>
+> System: Ok you said you wanted an expensive restaurant, right? (note here that the system asks the same question, which is to be expected because after the irrelevant user response the state hasn’t changed, so the policy is going to select the same action, there is no training here, this is during testing and the policy is fixed)
+>
 > User: yes
+>
 > System: Where would you like the restaurant to be located?
+>
 > User: in hollywood
+>
 > System: Ok you said you wanted a restaurant in Hollywood, right?
+>
 > User: Yes.
-> System: I found 3 restaurants matching your query. Hiroshima is an expensive Japanese
-> restaurant in Hollywood. The phone number is 310-356-7264. Mr. Changs is an expensive
-> Chinese restaurant in Hollywood. The phone number is 310-535-7545. Canyon Road is an
-> expensive Mexican restaurant in Hollywood. The phone number is 310-235-4636.  
+>
+> System: I found 3 restaurants matching your query. Hiroshima is an expensive Japanese restaurant in Hollywood. The phone number is 310-356-7264. Mr. Changs is an expensive Chinese restaurant in Hollywood. The phone number is 310-535-7545. Canyon Road is an expensive Mexican restaurant in Hollywood. The phone number is 310-235-4636.  
